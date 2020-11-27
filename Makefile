@@ -1,3 +1,8 @@
+# SPDX-License-Identifier: GPL-3.0
+#
+# Makefile for the myled.
+#
+
 obj-m := myled.o
 
 myled.ko: myled.c

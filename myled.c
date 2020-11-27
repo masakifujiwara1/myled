@@ -1,9 +1,15 @@
+// SPDX-License-Identifier: GPL-3.0
+/*
+ * driver for LED control
+ */
+
 #include<linux/module.h>
 #include<linux/fs.h>
 #include<linux/cdev.h>
 #include<linux/device.h>
 #include<linux/uaccess.h>
 #include<linux/io.h>
+#include<linux/delay.h>
 
 MODULE_AUTHOR("Ryuichi Ueda and Masaki Fujiwara");
 MODULE_DESCRIPTION("driver for LED control");
@@ -28,7 +34,73 @@ static ssize_t led_write(struct file* filp, const char* buf, size_t count, loff_
 	}else if(c == '1')
 	{
 		gpio_base[7] = 1 << 25;
+	}else if(c == '2')
+	{
+		int count, s, o;
+		int onetime=100;
+
+		for(count=0;count<3;count++)
+		{
+			for(s=0;s<3;s++)
+			{
+				gpio_base[7] = 1 << 25;
+				mdelay(onetime);
+				gpio_base[10] = 1 << 25;
+				mdelay(onetime);
+			}
+			mdelay(2*onetime);
+			for(o=0;o<3;o++)
+			{
+				gpio_base[7] = 1 << 25;     
+				mdelay(3*onetime);
+				gpio_base[10] = 1 << 25;
+				mdelay(onetime);
+			}
+			mdelay(2*onetime);
+			for(s=0;s<3;s++)                                                                                                        {
+                                gpio_base[7] = 1 << 25;                                                                                                 mdelay(onetime);                                                                                                        gpio_base[10] = 1 << 25;
+                                mdelay(onetime);                                                                                                }
+			mdelay(10*onetime);
+
+		}
+
+	}else if(c == '3')
+	{
+		int n, stage=200, ms=2000;
+		int dutycycle=10000;//10ms
+		int dutyratio=1000;//1ms duty比　dutycycle(ms)*dutyratio(ms)=10%
+		int ontime, offtime, amount;
+		ms/=dutycycle;
+		amount=(dutycycle-dutyratio)/stage;
+
+		//ontime=dutyratio*dutycyle;
+		//offtime=dutycyle-ontime;
+
+		for(n=0;n<ms;n++)
+		{
+			dutyratio+=amount;
+			ontime=dutyratio*dutycycle;
+			offtime=dutycycle-ontime;
+			
+			gpio_base[7] = 1 << 25;
+			udelay(ontime);
+			gpio_base[10] = 1 << 25;
+			udelay(offtime);
+		}
+		for(n=0;n<ms;n++)
+		{
+			ontime=dutyratio*dutycycle;
+			offtime=dutycycle-ontime;
+			dutyratio-=amount;
+			gpio_base[7] = 1 << 25;
+			udelay(ontime);
+			gpio_base[10] = 1 << 25;
+			udelay(offtime);
+		}
 	}
+
+
+
 
 	return 1;
 }
