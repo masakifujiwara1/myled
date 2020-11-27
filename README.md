@@ -1,11 +1,13 @@
 # デバイスドライバーの改造
 ## 使い方
-1,git clone https://github.com/masakifujiwara1/myled.git  
-2,cd myled  
-3,make  
-4,sudo insmod myled.ko  
-5,sudo chmod 666 /dev/myled0  
-6, echo (0~3) > /dev/myled0
+```bash
+git clone https://github.com/masakifujiwara1/myled.git  
+cd myled  
+make  
+sudo insmod myled.ko  
+sudo chmod 666 /dev/myled0  
+echo (0~3) > /dev/myled0
+```
 ## 内容
 - echo 0 の時：LED消灯
 - echo 1 の時：LED点灯
