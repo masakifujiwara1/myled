@@ -37,19 +37,19 @@ static ssize_t led_write(struct file* filp, const char* buf, size_t count, loff_
 	}else if(c == '2')
 	{
 		int count, s, o;
-		int onetime=100;
+		int onetime=100;//0.1s
 
 		for(count=0;count<3;count++)
 		{
-			for(s=0;s<3;s++)
+			for(s=0;s<3;s++)//sosのsの・・・部分
 			{
 				gpio_base[7] = 1 << 25;
-				mdelay(onetime);
+				mdelay(onetime);//ms遅らせる
 				gpio_base[10] = 1 << 25;
 				mdelay(onetime);
 			}
 			mdelay(2*onetime);
-			for(o=0;o<3;o++)
+			for(o=0;o<3;o++)//sosのoの---部分
 			{
 				gpio_base[7] = 1 << 25;     
 				mdelay(3*onetime);
@@ -66,10 +66,11 @@ static ssize_t led_write(struct file* filp, const char* buf, size_t count, loff_
 
 	}else if(c == '3')
 	{
-		int j, n, stage=200, ms=2000000;//2000ms
-		int dutycycle=10000;//10ms
-		int dutyratio=200;//0.2ms duty比　dutycycle(ms)*dutyratio(ms)=2%
-		int ontime, offtime, amount;
+		int j, n, stage=200;//stage=ms/dutycycle
+		int ms=2000000;//2000ms
+		int dutycycle=10000;//10ms 実際は周期
+		int dutyratio=200;//0.2ms 実際はdutycycle (dutycycle(ms)/dutyratio(ms))*100=2%
+		int ontime, offtime, amount;//amount:duty比の変化量
 
 		ms/=dutycycle;
 		amount=(dutycycle-dutyratio)/stage;
@@ -79,18 +80,18 @@ static ssize_t led_write(struct file* filp, const char* buf, size_t count, loff_
 
 		for(j=0;j<3;j++)
 		{
-			for(n=0;n<ms;n++)
+			for(n=0;n<ms;n++)//2sかけて0%→100%
 			{
 				//dutyratio+=amount;
 				ontime=dutyratio;
 				offtime=dutycycle-ontime;
 				dutyratio+=amount;
 				gpio_base[7] = 1 << 25;
-				udelay(ontime);
+				udelay(ontime);//us遅らせる
 				gpio_base[10] = 1 << 25;
 				udelay(offtime);
 			}
-			for(n=0;n<ms;n++)
+			for(n=0;n<ms;n++)//2sかけて100%→0%
 			{
 				ontime=dutyratio;
 				offtime=dutycycle-ontime;
