@@ -66,37 +66,43 @@ static ssize_t led_write(struct file* filp, const char* buf, size_t count, loff_
 
 	}else if(c == '3')
 	{
-		int n, stage=200, ms=2000;
+		int j, n, stage=200, ms=2000000;//2000ms
 		int dutycycle=10000;//10ms
-		int dutyratio=1000;//1ms duty比　dutycycle(ms)*dutyratio(ms)=10%
+		int dutyratio=200;//0.2ms duty比　dutycycle(ms)*dutyratio(ms)=2%
 		int ontime, offtime, amount;
+
 		ms/=dutycycle;
 		amount=(dutycycle-dutyratio)/stage;
 
 		//ontime=dutyratio*dutycyle;
 		//offtime=dutycyle-ontime;
 
-		for(n=0;n<ms;n++)
+		for(j=0;j<3;j++)
 		{
-			dutyratio+=amount;
-			ontime=dutyratio*dutycycle;
-			offtime=dutycycle-ontime;
-			
-			gpio_base[7] = 1 << 25;
-			udelay(ontime);
-			gpio_base[10] = 1 << 25;
-			udelay(offtime);
+			for(n=0;n<ms;n++)
+			{
+				//dutyratio+=amount;
+				ontime=dutyratio;
+				offtime=dutycycle-ontime;
+				dutyratio+=amount;
+				gpio_base[7] = 1 << 25;
+				udelay(ontime);
+				gpio_base[10] = 1 << 25;
+				udelay(offtime);
+			}
+			for(n=0;n<ms;n++)
+			{
+				ontime=dutyratio;
+				offtime=dutycycle-ontime;
+				dutyratio-=amount;
+				gpio_base[7] = 1 << 25;
+				udelay(ontime);
+				gpio_base[10] = 1 << 25;
+				udelay(offtime);
+			}
+			mdelay(1000);
 		}
-		for(n=0;n<ms;n++)
-		{
-			ontime=dutyratio*dutycycle;
-			offtime=dutycycle-ontime;
-			dutyratio-=amount;
-			gpio_base[7] = 1 << 25;
-			udelay(ontime);
-			gpio_base[10] = 1 << 25;
-			udelay(offtime);
-		}
+		
 	}
 
 
