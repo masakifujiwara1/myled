@@ -19,7 +19,9 @@
 2　一符号を作る各線又は点の間隔は、一点に等しい。  
 3　二符号の間隔は、三点に等しい。  
 4　二語の間隔は、七点に等しい。  
-出典：[総務省ホームページ](https://www.tele.soumu.go.jp/horei/reiki_honbun/72393000001.html)  
+出典：[総務省　電波利用ホームページ](https://www.tele.soumu.go.jp/horei/reiki_honbun/72393000001.html)  
 ## pwm制御について
 - 4sかけてduty比が0%→100%→0%になるようになっています。
 - 10msでduty比が0.5%増減→1sで50％ほど変化
+## youtube
+https://www.youtube.com/watch?v=1XYUYnG7E9o&ab_channel=%E5%8B%95%E7%94%BB%E4%BF%9D%E7%AE%A1%E5%BA%AB
