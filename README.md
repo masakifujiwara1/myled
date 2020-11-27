@@ -1,4 +1,9 @@
 # デバイスドライバーの改造
+## 動作環境
+以下の環境にて動作確認を行っています。  
+  
+- OS:Ubuntu 18.04 LTS
+- Raspberry Pi3 Model B
 ## 使い方
 ```bash
 git clone https://github.com/masakifujiwara1/myled.git  
