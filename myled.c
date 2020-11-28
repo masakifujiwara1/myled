@@ -74,7 +74,7 @@ static ssize_t led_write(struct file* filp, const char* buf, size_t count, loff_
 		int j, n, stage=200;//stage=ms/dutycycle
 		int ms=2000000;//2000ms
 		int dutycycle=10000;//10ms 実際は周期
-		int dutyratio=200;//0.2ms 実際はdutycycle (dutycycle(ms)/dutyratio(ms))*100=2%
+		int dutyratio=200;//0.2ms 実際はdutycycle (dutyratio(ms)/dutycycle(ms))*100=2%
 		int ontime, offtime, amount;//amount:duty比の変化量
 
 		ms/=dutycycle;
