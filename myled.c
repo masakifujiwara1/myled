@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: GPL-3.0
+// (c) 2020 RyuichiUeda and MasakiFujiwara
 /*
  * driver for LED control
  */
