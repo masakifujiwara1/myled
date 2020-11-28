@@ -57,10 +57,14 @@ static ssize_t led_write(struct file* filp, const char* buf, size_t count, loff_
 				mdelay(onetime);
 			}
 			mdelay(2*onetime);
-			for(s=0;s<3;s++)                                                                                                        {
-                                gpio_base[7] = 1 << 25;                                                                                                 mdelay(onetime);                                                                                                        gpio_base[10] = 1 << 25;
-                                mdelay(onetime);                                                                                                }
-			mdelay(10*onetime);
+			for(s=0;s<3;s++)
+			{
+				gpio_base[7] = 1 <<25;
+				mdelay(onetime);
+				gpio_base[10] = 1 <<25;
+				mdelay(onetime);
+			}
+				mdelay(10*onetime);
 
 		}
 
