@@ -13,6 +13,7 @@ sudo insmod myled.ko
 sudo chmod 666 /dev/myled0  
 echo (0~3) > /dev/myled0
 ```
+- pin番号22 : GPIO 25を使ってください。
 ## 内容
 - echo 0 の時：LED消灯
 - echo 1 の時：LED点灯
