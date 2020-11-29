@@ -15,7 +15,7 @@ sudo chmod 666 /dev/myled0
 echo (0~3) > /dev/myled0
 ```
 - pin番号22 : GPIO 25を使ってください。
-- 使用した回路図
+- 使用した回路図  
 ![スクリーンショット 2020-11-29 175226](https://user-images.githubusercontent.com/72371743/100537400-a9683380-326b-11eb-9b56-2a43d93f53ac.png)
 
 ## 内容
