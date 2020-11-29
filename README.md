@@ -25,6 +25,8 @@ echo (0~3) > /dev/myled0
 <img src="https://user-images.githubusercontent.com/72371743/100539171-eafedb80-3277-11eb-8cd0-c2c7a193b4a7.gif"  width="500px">  
 
 - echo 3 の時：LEDのpwm制御
+<img src="https://user-images.githubusercontent.com/72371743/100539304-e38c0200-3278-11eb-998f-0fcd046b23b5.gif" width="500px">
+
 ## モールス信号について
 - モールス信号の再現は無線局運用規則 別表第一号 モールス符号(第十二条関係)に則って再現しています。  
 以下本文の一部抜粋  
