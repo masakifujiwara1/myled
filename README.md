@@ -22,7 +22,8 @@ echo (0~3) > /dev/myled0
 - echo 0 の時：LED消灯
 - echo 1 の時：LED点灯
 - echo 2 の時:モールス信号のSOS（・・・ －－－ ・・・）を再現したLEDの点滅
- <img src="https://user-images.githubusercontent.com/72371743/100539171-eafedb80-3277-11eb-8cd0-c2c7a193b4a7.gif" width="500px">
+<img src="https://user-images.githubusercontent.com/72371743/100539171-eafedb80-3277-11eb-8cd0-c2c7a193b4a7.gif"  width="500px">  
+
 - echo 3 の時：LEDのpwm制御
 ## モールス信号について
 - モールス信号の再現は無線局運用規則 別表第一号 モールス符号(第十二条関係)に則って再現しています。  
